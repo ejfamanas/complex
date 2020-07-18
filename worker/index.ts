@@ -7,7 +7,7 @@ dotenv.config();
 console.log("starting worker...")
 const redisClient = redis.createClient({
     host: keys.redisHost,
-    port: keys.redisPort,
+    port: parseInt(keys.redisPort),
     retry_strategy: () => 1000,
 });
 
@@ -18,7 +18,7 @@ function fib(index: number): number {
 }
 
 sub.on("message", (channel: string, message: string) => {
-    redisClient.hset("values", message, fib(parseInt(message)));
+    redisClient.hset("values", message, fib(parseInt(message)).toString());
 })
 // this will probably break
-sub.subscribe({applicationServerKey: "insert"});
+sub.subscribe("insert");
