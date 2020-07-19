@@ -20,7 +20,7 @@ const pgClient = new Pool({
   port: keys.pgPort,
 });
 
-pgClient.on('connect', () => {
+pgClient.on('connect', (): void => {
   pgClient
       .query('CREATE TABLE IF NOT EXISTS values (number INT)')
       .catch((err) => console.log(err));
@@ -37,17 +37,17 @@ const redisPublisher = redisClient.duplicate();
 
 // Express route handlers
 
-app.get('/', (req, res) => {
+app.get('/', (req, res): void => {
   res.send('Hi');
 });
 
-app.get('/values/all', async (req, res) => {
+app.get('/values/all', async (req, res): Promise<void> => {
   const values = await pgClient.query('SELECT * from values');
 
   res.send(values.rows);
 });
 
-app.get('/values/current', async (req, res) => {
+app.get('/values/current', async (req, res): Promise<void> => {
   redisClient.hgetall('values', (err, values) => {
     res.send(values);
   });
