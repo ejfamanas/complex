@@ -1,8 +1,7 @@
-import * as dotenv from "dotenv";
 import * as redis from "redis";
-import {default as keys} from "./keys";
 
-dotenv.config();
+// stated this way because of initialization hack
+const keys = require('./keys');
 
 console.log("starting worker...")
 const redisClient = redis.createClient({

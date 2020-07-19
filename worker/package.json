@@ -12,7 +12,6 @@
   "license": "ISC",
   "dependencies": {
     "@types/node": "^14.0.23",
-    "dotenv": "^8.2.0",
     "nodemon": "^2.0.4",
     "redis": "^3.0.2"
   },
