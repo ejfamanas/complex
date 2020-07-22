@@ -2,13 +2,18 @@ import * as React from "react";
 import {default as http} from "axios";
 import {useEffect} from "react";
 
+interface num {
+    number: number,
+}
+
 export default function Fib(): JSX.Element {
-    const [seenIndexes, setSeenIndexes] = React.useState<Array<number>>([]);
+    const [seenIndexes, setSeenIndexes] = React.useState<Array<num>>([]);
     const [values, setValues] = React.useState<{}>({});
     const [index, setIndex] = React.useState<string>("");
     const fetchValues = async (): Promise<void> => {
-        const {data} = await http.get("api/values/current");
-        setValues({values: data});
+        const values = await http.get("api/values/current");
+        console.log(values);
+        setValues({});
     }
     const fetchIndexes = async (): Promise<void> => {
         const {data} = await http.get("api/values/all");
@@ -22,7 +27,7 @@ export default function Fib(): JSX.Element {
         setIndex("");
     }
     const renderSeenIndexes = (): string => {
-        return seenIndexes.map((n: number) => n).join(", ");
+        return seenIndexes.map(({number}: num) => number).join(", ");
     }
     const renderValues = (): Array<JSX.Element> => {
         const entries = [];

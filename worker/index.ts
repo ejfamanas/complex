@@ -21,3 +21,4 @@ sub.on("message", (channel: string, message: string) => {
 })
 // this will probably break
 sub.subscribe("insert");
+
