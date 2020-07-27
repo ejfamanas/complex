@@ -10,7 +10,7 @@ before_install:
 
 script:
   # run tests
-  - docker run efamanas/react-test npm test -- --coverage
+  - docker run -e CI=true efamanas/react-test npm test
 
 after_success:
   # build out each image
@@ -18,11 +18,11 @@ after_success:
   - docker build -t efamanas/complex-nginx ./nginx
   - docker build -t efamanas/complex-server ./server
   - docker build -t efamanas/complex-worker ./worker
-#  # Log into docker CLI
-#  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-#  # Take the image collection and push them to docker hub
-#  - docker push efamanas/complex-client
-#  - docker push efamanas/complex-nginx
-#  - docker push efamanas/complex-server
-#  - docker push efamanas/complex-worker
+  # Log into docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take the image collection and push them to docker hub
+  - docker push efamanas/complex-client
+  - docker push efamanas/complex-nginx
+  - docker push efamanas/complex-server
+  - docker push efamanas/complex-worker
 
