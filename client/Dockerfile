@@ -1,11 +1,8 @@
 # ------ BUILD PHASE ------ #
 # Add in base operating system image
-FROM alpine
+FROM node:alpine
 # create and set the new working director
 WORKDIR '/app'
-# Install some dependencies
-RUN apk add --update nodejs
-RUN apk add --update npm
 # Copy package.json from local machine
 COPY package*.json ./
 # Install package.json dependencies
