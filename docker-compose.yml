@@ -21,7 +21,7 @@ services:
       - postgres
     build:
       dockerfile: Dockerfile.dev
-      context: __server__
+      context: ./server
     volumes:
       - /app/node_modules
       - ./server:/app
