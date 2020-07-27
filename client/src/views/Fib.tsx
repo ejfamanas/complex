@@ -12,7 +12,6 @@ export default function Fib(): JSX.Element {
     const [index, setIndex] = React.useState<string>("");
     const fetchValues = async (): Promise<void> => {
         const values = await http.get("api/values/current");
-        console.log(values);
         setValues({});
     }
     const fetchIndexes = async (): Promise<void> => {
