@@ -1,0 +1,28 @@
+# specify required permissions
+sudo: required
+services:
+  # specify required services
+  - docker
+
+before_install:
+  # set up container for test environment
+  - docker build -t efamanas/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  # run tests
+  - docker run efamanas/react-test npm test -- --coverage
+
+after_success:
+  # build out each image
+  - docker build -t efamanas/complex-client ./client
+  - docker build -t efamanas/complex-nginx ./nginx
+  - docker build -t efamanas/complex-server ./server
+  - docker build -t efamanas/complex-worker ./worker
+  # Log into docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take the image collection and push them to docker hub
+  - docker push efamanas/complex-client
+  - docker push efamanas/complex-nginx
+  - docker push efamanas/complex-server
+  - docker push efamanas/complex-worker
+
