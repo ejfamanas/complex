@@ -18,11 +18,16 @@ after_success:
   - docker build -t efamanas/complex-nginx ./nginx
   - docker build -t efamanas/complex-server ./server
   - docker build -t efamanas/complex-worker ./worker
-  # Log into docker CLI
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  # Take the image collection and push them to docker hub
-  - docker push efamanas/complex-client
-  - docker push efamanas/complex-nginx
-  - docker push efamanas/complex-server
-  - docker push efamanas/complex-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-west-2"
+  app: "complex"
+  env: "Complex-env"
+  bucket_name: "http://complex-env.eba-kbi2ri2j.eu-west-2.elasticbeanstalk.com/"
+  bucket_path: "complex"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
 
