@@ -20,7 +20,7 @@
     },
     {
       "name": "nginx",
-      "image": "efamanas/complex-client",
+      "image": "efamanas/complex-nginx",
       "essential": true,
       "portMappings": [
         {
