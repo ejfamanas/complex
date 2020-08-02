@@ -20,6 +20,7 @@ after_success:
   - docker build -t efamanas/complex-worker ./worker
 
 deploy:
+  edge: true
   provider: elasticbeanstalk
   region: "eu-west-2"
   app: "complex"
