@@ -24,7 +24,7 @@
       "essential": true,
       "portMappings": [
         {
-          "hostPort": 3050,
+          "hostPort": 80,
           "containerPort": 80
         }
       ],
