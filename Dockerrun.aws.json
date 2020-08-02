@@ -5,6 +5,7 @@
       "name": "client",
       "image": "efamanas/complex-client",
       "hostname": "client",
+      "memoryReservation": 4,
       "essential": false
     },
     {
